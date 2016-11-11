@@ -50,7 +50,7 @@ const mat = new THREE.MeshLambertMaterial({ color: 0xB9E13C })
 
 const cmoMat = shaderMaterial
 let cmo = null
-new THREE.JSONLoader().load('/models/cmo.json', (geometry) => {
+new THREE.JSONLoader().load('/codevember/2016/10/models/cmo.json', (geometry) => {
   const mesh = new THREE.Mesh(geometry, cmoMat)
   cmo = mesh
   mesh.position.set(0, 1.25, 0)
