@@ -1,9 +1,10 @@
 uniform float time;
 
-void main() {
-    float g = sin(time);
-    float r = cos(time);
-    float b = tan(time);
+varying vec3 pos;
 
-    gl_FragColor = vec4(r, g, b, 1.0);
+void main() {
+    vec3 color;
+    color = pos * sin(time) + 0.2;
+
+    gl_FragColor = vec4(color, 1.0);
 }

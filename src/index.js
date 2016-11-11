@@ -48,7 +48,7 @@ const mat = new THREE.MeshLambertMaterial({ color: 0xB9E13C })
 
 // === MESH ===
 
-const cmoMat = mat
+const cmoMat = shaderMaterial
 let cmo = null
 new THREE.JSONLoader().load('/models/cmo.json', (geometry) => {
   const mesh = new THREE.Mesh(geometry, cmoMat)
