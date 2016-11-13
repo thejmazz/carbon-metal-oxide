@@ -2,6 +2,9 @@ import { createScene, createStats } from './lib/create.js'
 
 const glslify = require('glslify')
 
+// console.log(THREE.ShaderChunk.meshlambert_vert)
+// console.log(THREE.ShaderChunk.meshlambert_frag)
+
 const loader = new THREE.OBJLoader()
 
 const { scene, camera, renderer } = createScene({
@@ -34,14 +37,15 @@ scene.add(plane)
 
 // === MATERIAL ===
 
-const uniforms = {
-  time: { type: 'f', value: 0.0, step: 0.03 }
-}
+const uniforms = Object.assign({}, THREE.ShaderLib.lambert.uniforms, {
+  time: { type: 'f', value: 0.0, step: 0.03 },
+})
 
 const shaderMaterial = new THREE.ShaderMaterial({
   uniforms: uniforms,
   vertexShader: glslify('./shaders/vert.glsl'),
-  fragmentShader: glslify('./shaders/frag.glsl')
+  fragmentShader: glslify('./shaders/frag.glsl'),
+  lights: true
 })
 
 const mat = new THREE.MeshLambertMaterial({ color: 0xB9E13C })
@@ -50,7 +54,7 @@ const mat = new THREE.MeshLambertMaterial({ color: 0xB9E13C })
 
 const cmoMat = shaderMaterial
 let cmo = null
-new THREE.JSONLoader().load('/codevember/2016/10/models/cmo.json', (geometry) => {
+new THREE.JSONLoader().load('/models/cmo.json', (geometry) => {
   const mesh = new THREE.Mesh(geometry, cmoMat)
   cmo = mesh
   mesh.position.set(0, 1.25, 0)
